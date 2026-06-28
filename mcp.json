@@ -1,0 +1,9 @@
+// Put this inside ~/.claude.json
+{ // ...
+  "mcpServers": {
+    "aws-knowledge": {
+      "type": "http",
+      "url": "https://knowledge-mcp.global.api.aws"
+    }
+  }
+}
