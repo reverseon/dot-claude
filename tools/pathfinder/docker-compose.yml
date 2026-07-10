@@ -1,0 +1,38 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: pathfinder
+      POSTGRES_USER: pathfinder
+      POSTGRES_PASSWORD: changeme
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pathfinder"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    image: ghcr.io/copilotkit/pathfinder:latest
+    ports:
+      - "3001:3001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      DATABASE_URL: postgres://pathfinder:changeme@db:5432/pathfinder
+      PATHFINDER_CONFIG: /app/pathfinder.yaml
+      NODE_ENV: production
+      MCP_JWT_SECRET: acc2fae1a73e64fcd195755e78f5d597d51f12d8c9a009ca18a9eac09d8d5e3b
+      PATHFINDER_CONSENT_HMAC_KEY: b6a792acbeb3a7f7c27738051d608e0f3fff65fa7636cd4c7344605eed9e837b
+    volumes:
+      - ./pathfinder.yaml:/app/pathfinder.yaml:ro
+      - workspaces:/data
+      - ../../knowledgebase:/knowledgebase:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  workspaces:

@@ -1,0 +1,42 @@
+server:
+  name: local-knowledgebase
+  version: 1.0.0
+
+sources:
+  - name: k8s-docs
+    type: markdown
+    path: /knowledgebase/k8s-docs/content/en/docs
+    file_patterns:
+      - "**/*.md"
+      - "**/*.mdx"
+    chunk:
+      target_tokens: 600
+      overlap_tokens: 50
+
+tools:
+  - name: search-k8s
+    type: search
+    description: Search Kubernetes documentation
+    source: k8s-docs
+    default_limit: 5
+    max_limit: 20
+    result_format: docs
+
+  - name: explore-k8s
+    type: bash
+    description: Explore Kubernetes docs
+    sources: [k8s-docs]
+    bash:
+      session_state: true
+      grep_strategy: hybrid
+
+embedding:
+  provider: ollama
+  model: nomic-embed-text
+  dimensions: 768
+  base_url: http://host.docker.internal:11434
+
+indexing:
+  auto_reindex: true
+  reindex_hour_utc: 3
+  stale_threshold_hours: 24
