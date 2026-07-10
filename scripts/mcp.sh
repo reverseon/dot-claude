@@ -7,7 +7,7 @@ claude mcp add --transport http aws-knowledge https://knowledge-mcp.global.api.a
 
 # MCP Docs
 
-claude mcp remove mcp-docs && claude mcp add-json mcp-docs \
+claude mcp remove mcp-docs -s user || true && claude mcp add-json mcp-docs \
   '{
     "type": "stdio",
     "command": "uvx",
@@ -15,7 +15,8 @@ claude mcp remove mcp-docs && claude mcp add-json mcp-docs \
       "--from", "mcpdoc", "mcpdoc",
       "--urls",
       "Claude:https://claude.com/docs/llms-full.txt",
-      "Docker:https://docs.docker.com/llms-full.txt"
+      "Docker:https://docs.docker.com/llms-full.txt",
+      "GitHub:https://docs.github.com/llms.txt"
     ]
   }' \
   -s user

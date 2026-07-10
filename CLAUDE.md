@@ -44,3 +44,11 @@ When in doubt:
 - Ask before proceeding if unverifiable
 
 Training data has a knowledge cutoff. External systems don't. For anything that could reasonably change or be environment-specific, verify rather than rely on training knowledge.
+
+### Prefer MCP Servers Over General Tools
+
+When an MCP server is available for a system (e.g., mcp-docs for GitHub/Docker/Claude docs), use it instead of general tools:
+- Use `mcp__mcp-docs__*` tools for official documentation (GitHub, Docker, Claude)
+- Use `WebFetch` only when no specialized MCP server exists
+- Check `<system-reminder>` deferred tools and available skills before defaulting to general tools
+- MCP servers provide better coverage, structured access, and fresher documentation than general web fetching
