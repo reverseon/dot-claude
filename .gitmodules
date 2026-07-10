@@ -1,3 +1,0 @@
-[submodule "knowledgebase/k8s-docs"]
-	path = knowledgebase/k8s-docs
-	url = https://github.com/kubernetes/website
