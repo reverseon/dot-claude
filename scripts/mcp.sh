@@ -17,7 +17,8 @@ claude mcp remove mcp-docs -s user || true && claude mcp add-json mcp-docs \
       "Claude:https://claude.com/docs/llms-full.txt",
       "Docker:https://docs.docker.com/llms-full.txt",
       "GitHub:https://docs.github.com/llms.txt",
-      "Ollama:https://docs.ollama.com/llms-full.txt"
+      "Ollama:https://docs.ollama.com/llms-full.txt",
+      "PyTorch:https://docs.pytorch.org/docs/2.4/llms.txt"
     ]
   }' \
   -s user
