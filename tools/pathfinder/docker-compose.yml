@@ -1,6 +1,8 @@
 services:
   db:
     image: pgvector/pgvector:pg16
+    ports:
+      - "15432:5432"
     environment:
       POSTGRES_DB: pathfinder
       POSTGRES_USER: pathfinder
@@ -17,10 +19,9 @@ services:
     image: ghcr.io/copilotkit/pathfinder:latest
     ports:
       - "3001:3001"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    network_mode: host
     environment:
-      DATABASE_URL: postgres://pathfinder:changeme@db:5432/pathfinder
+      DATABASE_URL: postgres://pathfinder:changeme@localhost:15432/pathfinder
       PATHFINDER_CONFIG: /app/pathfinder.yaml
       NODE_ENV: production
       MCP_JWT_SECRET: acc2fae1a73e64fcd195755e78f5d597d51f12d8c9a009ca18a9eac09d8d5e3b

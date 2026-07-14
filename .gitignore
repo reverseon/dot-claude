@@ -1,2 +1,9 @@
 *.tar
+# Other Knowledgebase That Does Not Need To Be Pushed
 knowledgebase/k8s-docs
+knowledgebase/yt-dlp
+
+tmp/*
+# Private Knowledgebase
+knowledgebase/private-kb/*
+!knowledgebase/private-kb/private-kb.zip
